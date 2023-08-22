@@ -12,7 +12,8 @@ class Place extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title',
-        'description',        
+        'user_id',
+        'place',
+        'description'
     ];
 }
