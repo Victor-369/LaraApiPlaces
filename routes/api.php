@@ -34,8 +34,8 @@ Route::get('/comments', [CommentApiController::class, 'index']);
 Route::get('/comment/{comment}', [CommentApiController::class, 'show'])->where('comment', '^\d+$'); // Only numbers
 Route::get('/comments/{field}/{value}', [CommentApiController::class, 'search'])->where('field', '^comment|place_id$');
 Route::post('/comment', [CommentApiController::class, 'store']);
-Route::put('/comment/{place}', [CommentApiController::class, 'update']);
-Route::delete('/comment/{place}', [CommentApiController::class, 'delete']);
+Route::put('/comment/{comment}', [CommentApiController::class, 'update']);
+Route::delete('/comment/{comment}', [CommentApiController::class, 'delete']);
 
 // Wrong request
 Route::fallback(function() {

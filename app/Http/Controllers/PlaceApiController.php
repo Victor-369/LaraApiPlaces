@@ -46,4 +46,30 @@ class PlaceApiController extends Controller
                         response(['status' => 'OK', 'results' => $place], 201):
                         response(['status' => 'ERROR', 'message' => 'Not able to save data.'], 400);
     }
+
+    public function update(Request $request, $id) {
+        $place = Place::find($id);
+
+        if(!$place) {
+            return response(['status' => 'Not found'], 404);
+        }
+
+        $data = $request->json()->all();
+
+        return $place->update($data) ?
+                                    response(['status' => 'OK', 'results' => [$place]], 200):
+                                    response(['status' => 'ERROR', 'message' => 'Not able to save data.'], 400);
+    }
+
+    public function delete($id) {
+        $place = Place::find($id);
+
+        if(!$place) {
+            return response(['status' => 'NOT FOUND'], 404);
+        }
+
+        return $place->delete() ?
+                                response(['status' => 'OK']):
+                                response(['status' => 'ERROR', 'message' => 'Not able to delete it.'], 400);
+    }
 }
