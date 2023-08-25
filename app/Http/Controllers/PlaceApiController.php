@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Place;
+use App\Http\Requests\ApiCreatePlaceRequest;
+use App\Http\Requests\ApiUpdatePlaceRequest;
 
 
 class PlaceApiController extends Controller
@@ -37,7 +39,7 @@ class PlaceApiController extends Controller
                 ];
     }
 
-    public function store(Request $request) {
+    public function store(/*Request*/ ApiCreatePlaceRequest $request) {
         $data = $request->json()->all();
 
         $place = Place::create($data);
@@ -47,7 +49,7 @@ class PlaceApiController extends Controller
                         response(['status' => 'ERROR', 'message' => 'Not able to save data.'], 400);
     }
 
-    public function update(Request $request, $id) {
+    public function update(/*Request*/ ApiUpdatePlaceRequest $request, $id) {
         $place = Place::find($id);
 
         if(!$place) {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Http\Requests\ApiCreateCommentRequest;
+use App\Http\Requests\ApiUpdateCommentRequest;
 
 
 class CommentApiController extends Controller
@@ -39,7 +41,7 @@ class CommentApiController extends Controller
                 ];
     }
 
-    public function store(Request $request) {
+    public function store(/* Request */ ApiCreateCommentRequest $request) {
         $data = $request->json()->all();
 
         $comment = Comment::create($data);
@@ -49,7 +51,7 @@ class CommentApiController extends Controller
                         response(['status' => 'ERROR', 'message' => 'Not able to save data.'], 400);
     }
 
-    public function update(Request $request, $id) {
+    public function update(/* Request */ ApiUpdateCommentRequest $request, $id) {
         $comment = Comment::find($id);
 
         if(!$comment) {
